@@ -38,13 +38,13 @@ class PercolationStats:
     # low endpoint of 95% confidence interval
     def confidence_lo(self) -> float:
         mean = self.mean()
-        margin = 1.96 * self.stddev() / (len(self.T))
+        margin = 1.96 * self.stddev() / (len(self.T))**0.5
         return mean - margin
 
     # high endpoint of 95% confidence interval
     def confidence_hi(self) -> float:
         mean = self.mean()
-        margin = 1.96 * self.stddev() / (len(self.T))
+        margin = 1.96 * self.stddev() / (len(self.T))**0.5
         return mean + margin
 
     # test client (see below)
