@@ -14,10 +14,8 @@ class Percolation:
         self.virtual_top = 0
         self.virtual_bottom = self.grid_size + 1
 
-        for col in range(1, n + 1):
+        for col in range(n):
             self.uf.union(self.virtual_top, self._xy_to_1d(1, col))
-
-        for col in range(1, n + 1):
             self.uf.union(self.virtual_bottom, self._xy_to_1d(n, col))
 
     # opens the site (row, col) if it is not open already
@@ -66,7 +64,6 @@ class Percolation:
         return 1 <= row <= self.n and 1 <= col <= self.n
         
     def _xy_to_1d(self, row: int, col: int) -> int:
-        print((row - 1) * self.n + col)
         return (row - 1) * self.n + col
     
     # test client (optional)
