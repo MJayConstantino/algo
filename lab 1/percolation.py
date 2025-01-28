@@ -14,6 +14,13 @@ class Percolation:
         self.virtual_bottom = self.grid_size + 1
         self.uf = WeightedQuickUnionUF(self.grid_size + 2)
 
+        
+        for col in range(self.n+1):
+            self.uf.union(self.virtual_top, col)
+
+        for col in range(self.grid_size - self.n, self.grid_size + 1):
+            self.uf.union(self.virtual_bottom, col)
+
 
     # opens the site (row, col) if it is not open already
     def open(self, row: int, col: int) -> None:
@@ -38,6 +45,7 @@ class Percolation:
     def is_open(self, row: int, col: int) -> bool:
         self.validate(row, col)
         return self.opens[self._xy_to_1d(row, col)]
+    
 
     # is the site (row, col) full?
     def is_full(self, row: int, col: int) -> bool:
@@ -51,11 +59,6 @@ class Percolation:
 
     # does the system percolate?
     def percolates(self) -> bool:
-        for col in range(1, self.n+1):
-            if self.is_open(1, col):
-                self.uf.union(self.virtual_top, col+1)
-                self.uf.union(self.virtual_bottom, col+1)
-
         return self.uf.connected(self.virtual_top, self.virtual_bottom)
 
     # utils
