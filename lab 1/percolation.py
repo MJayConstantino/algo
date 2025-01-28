@@ -13,14 +13,12 @@ class Percolation:
         self.virtual_top = 0
         self.virtual_bottom = self.grid_size + 1
         self.uf = WeightedQuickUnionUF(self.grid_size + 2)
-
         
         for col in range(self.n+1):
             self.uf.union(self.virtual_top, col)
 
         for col in range(self.grid_size - self.n, self.grid_size + 1):
             self.uf.union(self.virtual_bottom, col)
-
 
     # opens the site (row, col) if it is not open already
     def open(self, row: int, col: int) -> None:
@@ -35,23 +33,27 @@ class Percolation:
                 (row, col - 1), # left
                 (row, col + 1), # right
             ]
-            for r, c in neighbors:
-                if self.is_valid(r, c) and self.is_open(r, c):
-                    neighbor_site = self._xy_to_1d(r, c)
+            for neighbor_row, neighbor_col in neighbors:
+                if self.is_valid(neighbor_row, neighbor_col) and self.is_open(neighbor_row, neighbor_col):
+                    neighbor_site = self._xy_to_1d(neighbor_row, neighbor_col)
                     self.uf.union(site, neighbor_site)
 
 
     # is the site (row, col) open?
     def is_open(self, row: int, col: int) -> bool:
         self.validate(row, col)
-        return self.opens[self._xy_to_1d(row, col)]
+        site = self._xy_to_1d(row, col)
+        return self.opens[site]
     
 
     # is the site (row, col) full?
     def is_full(self, row: int, col: int) -> bool:
         self.validate(row, col)
         site = self._xy_to_1d(row, col)
-        return self.uf.connected(self.virtual_top, site)
+        if self.is_open(row, col):
+            return self.uf.connected(self.virtual_top, site)
+        else:
+            return False
 
     # returns the number of open sites
     def number_of_open_sites(self) -> int:
@@ -75,21 +77,7 @@ class Percolation:
     # test client (optional)
     @staticmethod
     def main():
-        #test case 1
-        test1 = Percolation(7)
-        test1.open(1, 1)
-        test1.open(1, 2)
-        test1.open(1, 3)
-        test1.open(1, 4)
-        test1.open(1, 5)
-        test1.open(1, 6)
-        test1.open(1, 7)
-        print(test1.is_open(1, 1))
-        print(test1.is_open(2, 1))
-        print(test1.is_full(1, 1)) 
-        print(test1.is_full(2, 1)) 
-        print(test1.number_of_open_sites())  
-        print(test1.percolates())
+        pass
 
 if __name__ == "__main__":
     Percolation.main()
