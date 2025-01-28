@@ -24,7 +24,7 @@ class Percolation:
     def open(self, row: int, col: int) -> None:
         self.validate(row, col)
         if not self.is_open(row, col):
-            site = self._xy_to_1d(row, col)
+            site = self.matrix_to_array(row, col)
             self.opens[site] = True
 
             neighbors = [
@@ -35,21 +35,21 @@ class Percolation:
             ]
             for neighbor_row, neighbor_col in neighbors:
                 if self.is_valid(neighbor_row, neighbor_col) and self.is_open(neighbor_row, neighbor_col):
-                    neighbor_site = self._xy_to_1d(neighbor_row, neighbor_col)
+                    neighbor_site = self.matrix_to_array(neighbor_row, neighbor_col)
                     self.uf.union(site, neighbor_site)
 
 
     # is the site (row, col) open?
     def is_open(self, row: int, col: int) -> bool:
         self.validate(row, col)
-        site = self._xy_to_1d(row, col)
+        site = self.matrix_to_array(row, col)
         return self.opens[site]
     
 
     # is the site (row, col) full?
     def is_full(self, row: int, col: int) -> bool:
         self.validate(row, col)
-        site = self._xy_to_1d(row, col)
+        site = self.matrix_to_array(row, col)
         if self.is_open(row, col):
             return self.uf.connected(self.virtual_top, site)
         else:
@@ -71,7 +71,7 @@ class Percolation:
     def is_valid(self, row: int, col: int) -> bool:
         return 1 <= row <= self.n and 1 <= col <= self.n
         
-    def _xy_to_1d(self, row: int, col: int) -> int:
+    def matrix_to_array(self, row: int, col: int) -> int:
         return (row - 1) * self.n + col
     
     # test client (optional)
