@@ -17,8 +17,8 @@ class Percolation:
         for col in range(self.n+1):
             self.uf.union(self.virtual_top, col)
 
-        for col in range(self.grid_size - self.n, self.grid_size + 1):
-            self.uf.union(self.virtual_bottom, col)
+        # for col in range(self.grid_size - self.n, self.grid_size + 1):
+        #     self.uf.union(self.virtual_bottom, col)
 
     # opens the site (row, col) if it is not open already
     def open(self, row: int, col: int) -> None:
@@ -61,7 +61,9 @@ class Percolation:
 
     # does the system percolate?
     def percolates(self) -> bool:
-        return self.uf.connected(self.virtual_top, self.virtual_bottom)
+        for col in range(self.n):
+            if self.is_full(self.n, col + 1):
+                return True
 
     # utils
     def validate(self, row: int, col: int) -> None:
