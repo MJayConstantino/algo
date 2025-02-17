@@ -4,23 +4,23 @@
 # For example:
 # d = Deque[int]()
 #
-from typing import TypeVar
+from typing import TypeVar, Optional
 
 Item = TypeVar('Item')
 
 class Node:
     def __init__(self, item: Item):
-        self.item = item
-        self.next = None
-        self.prev = None
+        self.item: Item = item
+        self.next: Optional[Node] = None
+        self.prev: Optional[Node] = None
 
 
 class Deque[Item]:
     # construct an empty deque
     def __init__(self):
-        self.first: Node = None
-        self.last: Node = None
-        self._length = 0
+        self.first: Optional[Node] = None
+        self.last: Optional[Node] = None
+        self._length: int = 0
 
     # is the deque empty?
     def is_empty(self) -> bool:
@@ -133,6 +133,8 @@ class Deque[Item]:
 
         print(d.size())# should now be empty
         print(d.is_empty())
+
+
 
 if __name__ == "__main__":
     Deque.main()
