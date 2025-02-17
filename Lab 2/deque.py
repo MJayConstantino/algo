@@ -87,7 +87,15 @@ class Deque[Item]:
         return current_last.item
 
     def __iter__(self):
-        return self
+        nodes = []
+        current_node = self.first
+        while current_node:
+            nodes.append(current_node.item)
+            current_node = current_node.next
+
+        for item in nodes:
+            yield item  # Return items one by one
+
 
     # return the current item and tick the current item to the next
     # otherwise, raise StopIteration
@@ -134,7 +142,8 @@ class Deque[Item]:
         print(d.size())# should now be empty
         print(d.is_empty())
 
-
+        items_in_queue = [item for item in d]
+        print(items_in_queue)
 
 if __name__ == "__main__":
     Deque.main()
