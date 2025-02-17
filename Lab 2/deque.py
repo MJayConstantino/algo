@@ -4,18 +4,29 @@
 # For example:
 # d = Deque[int]()
 #
+Item = type('Item')
+
+class Node:
+    def __init__(self, item):
+        self.item = item
+        self.next = None
+        self.prev = None
+
+
 class Deque[Item]:
     # construct an empty deque
     def __init__(self):
-        self.deque = []
+        self.first = None
+        self.last = None
+        self.size = 0
 
     # is the deque empty?
     def is_empty(self) -> bool:
-        return len(self.deque) == 0
+        return len(self.size) == 0
 
     # return the number of items on the deque
     def size(self) -> int:
-        return len(self.deque)
+        return len(self.size)
 
     # add the item to the front
     def add_first(self, item: Item) -> None:
@@ -36,6 +47,8 @@ class Deque[Item]:
     def remove_last(self) -> Item:
         if self.is_empty:
             raise IndexError("Deque is empty!")
+        else:
+            self.r
 
     def __iter__(self):
         pass
