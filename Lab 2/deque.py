@@ -142,8 +142,7 @@ class Deque[Item]:
         print(d.size())# should now be empty
         print(d.is_empty())
 
-        items_in_queue = [item for item in d]
-        print(items_in_queue)
+        print([item for item in d]) # print items in deque
 
 if __name__ == "__main__":
     Deque.main()
