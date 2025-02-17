@@ -19,19 +19,23 @@ class Deque[Item]:
 
     # add the item to the front
     def add_first(self, item: Item) -> None:
-        pass
+        if item is None:
+            raise ValueError("Item should not be none!")
 
     # add the item to the back
     def add_last(self, item: Item) -> None:
-        pass
+        if item is None:
+            raise ValueError("Item should not be none!")
 
     # remove and return the item from the front
     def remove_first(self) -> Item:
-        pass
+        if self.is_empty:
+            raise IndexError("Deque is empty!")
 
     # remove and return the item from the back
     def remove_last(self) -> Item:
-        pass
+        if self.is_empty:
+            raise IndexError("Deque is empty!")
 
     def __iter__(self):
         pass
