@@ -10,7 +10,7 @@ def main():
     k = int(sys.argv[1])
     
     try:
-        with open("strings.txt", "r") as string_file:
+        with open("IVOS.txt", "r") as string_file:
             lines = [line.strip() for line in string_file.readlines()]
             
             if k > len(lines):

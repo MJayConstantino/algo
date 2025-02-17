@@ -36,8 +36,7 @@ class Deque[Item]:
             raise ValueError("Item should not be none!")
         new_node = Node(item)
         if self.is_empty():
-            self.first = new_node
-            self.last = new_node
+            self.first = self.last = new_node
         else:
             new_node.next = self.first
             self.first.prev = new_node
@@ -50,8 +49,7 @@ class Deque[Item]:
             raise ValueError("Item should not be none!")
         new_node = Node(item)
         if self.is_empty():
-            self.first = new_node
-            self.last = new_node
+            self.first = self.last = new_node
         else:
             new_node.prev = self.last
             self.last.next = new_node
@@ -64,8 +62,7 @@ class Deque[Item]:
             raise IndexError("Deque is empty!")
         current_first = self.first
         if self._length == 1:
-            self.first = None
-            self.last = None
+            self.first = self.last = None
         else:
             self.first = current_first.next
             self.first.prev = None
@@ -78,8 +75,7 @@ class Deque[Item]:
             raise IndexError("Deque is empty!")
         current_last = self.last
         if self._length == 1:
-            self.first = None
-            self.last = None
+            self.first = self.last = None
         else: 
             self.last = current_last.prev
             self.last.next = None
