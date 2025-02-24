@@ -3,28 +3,44 @@ import random
 import sys
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python permutation.py <number of strings to be called>")
+    # Check command-line arguments
+    if len(sys.argv) != 3:
+        print("Usage: python permutation.py <filename> <number_of_strings>")
         return
-    
-    k = int(sys.argv[1])
-    
+
+    filename = sys.argv[1]
+
     try:
-        with open("IVOS.txt", "r") as string_file:
-            lines = [line.strip() for line in string_file.readlines()]
-            
-            if k > len(lines):
-                print("Error: k is greater than the number of available strings.")
+        k = int(sys.argv[2])
+        if k <= 0:
+            print("Error: Number of strings (k) must be a positive integer.")
+            return
+    except ValueError:
+        print("Error: <number_of_strings> must be an integer.")
+        return
+
+    try:
+        with open(filename, "r") as file:
+            lines = [line.strip() for line in file if line.strip()]  # Remove empty lines
+
+            if not lines:
+                print("Error: The file is empty.")
                 return
-            
-            selected_strings = random.sample(lines, k)
-            
+
+            if k > len(lines):
+                print(f"Error: k ({k}) is greater than the number of available strings ({len(lines)}).")
+                return
+
+            selected_strings = random.sample(lines, k)  # Select k unique strings
+
+            print("\nSelected strings:")
             for string in selected_strings:
                 print(string)
+
     except FileNotFoundError:
-        print("Error: strings.txt file not found.")
-    except ValueError:
-        print("Error: Invalid value in strings.txt.")
+        print(f"Error: File '{filename}' not found.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
 
 if __name__ == "__main__":
     main()
