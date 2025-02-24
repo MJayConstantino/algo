@@ -4,22 +4,18 @@
 # For example:
 # d = Deque[int]()
 #
-from typing import TypeVar, Optional
-
-Item = TypeVar('Item')
-
 class Node:
-    def __init__(self, item: Item):
-        self.item: Item = item
-        self.next: Optional[Node] = None
-        self.prev: Optional[Node] = None
+    def __init__(self, item):
+        self.item = item
+        self.next = None
+        self.prev = None
 
 
 class Deque[Item]:
     # construct an empty deque
     def __init__(self):
-        self.first: Optional[Node] = None
-        self.last: Optional[Node] = None
+        self.first = None
+        self.last = None
         self._length: int = 0
 
     # is the deque empty?
@@ -108,7 +104,7 @@ class Deque[Item]:
     # unit testing (required)
     @staticmethod
     def main():
-        d = Deque()
+        d = Deque[str]()
         print(d.is_empty()) # should be true since there are no items in the deque yet
 
         d.add_first("first item")
