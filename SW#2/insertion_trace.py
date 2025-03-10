@@ -1,11 +1,10 @@
 def insertion_sort(string: str):
-    # ANSI escape codes for colors.
+
     RED = "\033[31m"
     GRAY = "\033[90m"
     WHITE = "\033[97m"
     RESET = "\033[0m"
 
-    # Convert the string into a list for in-place modifications.
     list_of_string = list(string)
     n = len(list_of_string)
     
@@ -17,8 +16,7 @@ def insertion_sort(string: str):
     
     # Save the initial state for comparison in subsequent iterations.
     prev_state = list_of_string.copy()
-    
-    # Insertion sort: start from index 1 (since index 0 is trivially sorted).
+
     for i in range(1, n):
         key = list_of_string[i]
         j = i - 1
@@ -28,7 +26,6 @@ def insertion_sort(string: str):
             list_of_string[j + 1] = list_of_string[j]
             j -= 1
         
-        # The correct insertion position is j + 1.
         insertion_index = j + 1
         list_of_string[insertion_index] = key
         
