@@ -48,7 +48,11 @@ class Point:
 
     def slope_to(self, that: Point) -> float:
         # calculate the slope from this to that Point
-        return (that.y - self.y) / (that.x - self.x)
+        dy = that.y - self.y
+        dx = that.x - self.x
+        
+        if dx == 0: return 999999
+        return (dy) / (dx)
     
     @staticmethod
     def main():
