@@ -51,8 +51,8 @@ class Point:
         dy = that.y - self.y
         dx = that.x - self.x
 
-        if dx == 0: return 999999
-        if dy == 0 and dx == 0: return -999999
+        if dx == 0: return float("inf")
+        if dy == 0 and dx == 0: return float("-inf")
         return (dy) / (dx)
     
     @staticmethod
