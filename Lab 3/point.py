@@ -50,8 +50,9 @@ class Point:
         # calculate the slope from this to that Point
         dy = that.y - self.y
         dx = that.x - self.x
-        
+
         if dx == 0: return 999999
+        if dy == 0 and dx == 0: return -999999
         return (dy) / (dx)
     
     @staticmethod
