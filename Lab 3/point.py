@@ -81,7 +81,7 @@ class Point:
         p1.draw_to(p2)
 
         # Calculate slope (uncomment this if you have implemented slope_to)
-        # print("Slope between p1 and p2:", p1.slope_to(p2))
+        print("Slope between p1 and p2:", p1.slope_to(p2))
 
         # Keep the window open
         turtle.done()
