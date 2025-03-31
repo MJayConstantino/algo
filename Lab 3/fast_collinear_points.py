@@ -4,7 +4,6 @@ from point import Point
 
 class FastCollinearPoints:
     def __init__(self, points: list[Point]):
-        """Initializes and validates the input points."""
         if points is None:
             raise ValueError("The list of points is None")
         
