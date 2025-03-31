@@ -1,5 +1,4 @@
 import turtle
-
 from fast_collinear_points import FastCollinearPoints
 from brute_collinear_points import BruteCollinearPoints
 from point import Point
@@ -16,18 +15,40 @@ def main(filename):
             x, y = map(int, f.readline().strip().split())
             points.append(Point(x, y))
 
-    # Draw the points
-    LENGTH = 32678
-    WIDTH = 32678
+    # Get bounds of the points
+    min_x = min(p.x for p in points) if points else 0
+    min_y = min(p.y for p in points) if points else 0
+    max_x = max(p.x for p in points) if points else 32678
+    max_y = max(p.y for p in points) if points else 32678
+
+    # Add margin
+    MARGIN_PERCENT = 0.1
+    width = max(1, max_x - min_x)  # Ensure non-zero width
+    height = max(1, max_y - min_y)  # Ensure non-zero height
+
+    margin_x = width * MARGIN_PERCENT
+    margin_y = height * MARGIN_PERCENT
+
+    view_min_x = max(0, min_x - margin_x)
+    view_min_y = max(0, min_y - margin_y)
+    view_max_x = min(32678, max_x + margin_x)
+    view_max_y = min(32678, max_y + margin_y)
+
+    # Get screen dimensions that comfortably fit on most displays
+    SCREEN_WIDTH = 1000
+    SCREEN_HEIGHT = 800
 
     # Initialize turtle screen
     screen = turtle.Screen()
-    screen.setup(LENGTH, WIDTH)
+    screen.setup(SCREEN_WIDTH, SCREEN_HEIGHT)
+    screen.title(f"Collinear Points from {filename}")
 
-    # Transfer the point of origin to the bottom left
-    turtle.setworldcoordinates(0, 0, LENGTH, WIDTH)
+    # Set the coordinate system to match the data bounds
+    turtle.setworldcoordinates(view_min_x, view_min_y, view_max_x, view_max_y)
     turtle.hideturtle()
+    turtle.speed(0)  # Fastest drawing speed
 
+    # Draw the points
     for p in points:
         p.draw()
 
