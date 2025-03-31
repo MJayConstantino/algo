@@ -1,4 +1,3 @@
-from __future__ import annotations
 from line_segment import LineSegment
 from point import Point
 
