@@ -29,13 +29,22 @@ class BruteCollinearPoints:
                         slope2 = p.slope_to(r)
                         slope3 = p.slope_to(s)
                         
-                        if slope1 == slope2 and slope2 == slope3:
+                        if slope1 == slope2 == slope3:
 
                             collinear_points = [p, q, r, s]
                             collinear_points.sort()
                             
                             min_point = collinear_points[0]
                             max_point = collinear_points[-1]
+
+                            for m in range(n):
+                                if m in (i, j, k, l):
+                                    continue
+                                if p.slope_to(points_copy[m]) == slope1:
+                                    if points_copy[m] < min_point:
+                                        min_point = points_copy[m]
+                                    if max_point < points_copy[m]:
+                                        max_point = points_copy[m]
                             
                             line_key = (min_point.x, min_point.y, max_point.x, max_point.y)
                             
