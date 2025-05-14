@@ -5,7 +5,9 @@ from board import Board
 
 
 class SearchNode:
-    """Helper class to represent a search node in the A* algorithm."""
+    """
+    Helper class to represent a search node in the A* algorithm.
+    """
     
     def __init__(self, board: Board, moves: int, previous: SearchNode = None):
         self.board = board
@@ -15,7 +17,9 @@ class SearchNode:
         self.priority = self.manhattan + moves
     
     def __lt__(self, other):
-        """Comparison method for the priority queue."""
+        """
+        Comparison method for the priority queue.
+        """
         return self.priority < other.priority
 
 
@@ -112,7 +116,9 @@ class Solver:
                 heapq.heappush(twin_pq, twin_neighbor_node)
     
     def _reconstruct_path(self, goal_node: SearchNode):
-        """Reconstructs the solution path from the goal node."""
+        """
+        Reconstructs the solution path from the goal node.
+        """
         path = []
         current = goal_node
         
